@@ -1,0 +1,35 @@
+* {
+    font-family: 'Fira Code' monospace;
+}
+body {
+    background-color: #2C363D;
+    padding: 2rem;
+    color: #ECF0F1;
+}
+
+h1,h2,h3 {
+    color: #ECF0F1;
+}
+
+button {
+    background-color: #BDC3C7;
+    color: #ECF0F1;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+button:hover {
+    background-color: #256DFF;
+}
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1rem;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
