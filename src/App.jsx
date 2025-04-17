@@ -1,9 +1,13 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import ReactPlayer from 'react-player'
+import React from 'react';
+import PalettePreview from './palettes/PalettePreview';
 
-<ReactPlayer
-  url="https://drive.google.com/uc?export=download&id=1Zv6hNa-6mBJTW8ZOx4PGdK3mJu15ak30"
-  controls
-  width="100%"
-/>
+function App() {
+  return (
+    <div style={{ padding: '2rem' }}>
+      <h1 style={{ fontFamily: 'Montserrat, sans-serif' }}>Color Palette Comparison</h1>
+      <PalettePreview name="Palette 1" />
+    </div>
+  );
+}
+
+export default App;
