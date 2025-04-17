@@ -19,12 +19,15 @@
   <iframe src="test.html?style=p1.css"></iframe>
 
   <script>
-    // Inject correct stylesheet into each iframe after it loads
     document.querySelectorAll("iframe").forEach(iframe => {
       iframe.addEventListener("load", () => {
-        const url = new URL(iframe.src);
+        const url = new URL(iframe.src, window.location.href);
         const styleName = url.searchParams.get("style");
-        iframe.contentDocument.getElementById("theme").href = `../styles/${styleName}`;
+        const doc = iframe.contentDocument || iframe.contentWindow.document;
+        const link = doc.getElementById("theme");
+        if (link) {
+          link.href = `../styles/${styleName}`;
+        }
       });
     });
   </script>
