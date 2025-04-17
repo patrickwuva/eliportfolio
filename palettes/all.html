@@ -3,68 +3,56 @@
 <head>
   <meta charset="UTF-8" />
   <title>All Palettes Preview</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
   <style>
-    body {
-        font-family: 'Montserrat', sans-serif;
-        padding: 1rem;
-        background: #fefefe;
-        color: #222;
+    .preview-title {
+      font-family: sans-serif;
+      font-weight: bold;
+      margin: 2rem 0 1rem;
     }
 
-    h1, h2, h3 {
-        font-weight: 700;
-        font-family: inherit;
-        }
-
-    h1 {
-    font-size: 2rem;
-    }
-
-    h2 {
-        font-size: 1.5rem;
-    }
-
-
-    iframe {
-      width: 100%;
+    .preview-container {
       border: 1px solid #ccc;
       margin-bottom: 2rem;
     }
   </style>
 </head>
 <body>
-  <h1>Color Palette Comparison</h1>
+  <h1 class="preview-title">Color Palette Comparison</h1>
 
-  <h2>Palette 1</h2>
-  <iframe src="test.html?style=p1.css"></iframe>
+  <div class="preview-title">Palette 1</div>
+  <div id="preview1" class="preview-container"></div>
+
+  <div class="preview-title">Palette 2</div>
+  <div id="preview2" class="preview-container"></div>
 
   <script>
-    document.querySelectorAll("iframe").forEach(iframe => {
-      iframe.addEventListener("load", () => {
-        const url = new URL(iframe.src, window.location.href);
-        const styleName = url.searchParams.get("style");
-        const doc = iframe.contentDocument || iframe.contentWindow.document;
-        const link = doc.getElementById("theme");
-        if (link) {
-          link.href = `../styles/${styleName}`;
-        }
-      });
-    });
-  
-    // 💡 Listen for messages from the iframe to resize its height
-    window.addEventListener("message", (event) => {
-      if (event.data.iframeHeight) {
-        // Find the iframe that sent the message
-        document.querySelectorAll("iframe").forEach(iframe => {
-          // match the origin by comparing contentWindow
-          if (iframe.contentWindow === event.source) {
-            iframe.style.height = event.data.iframeHeight + "px";
-          }
-        });
-      }
+    const templates = `
+      <h1>Palette Preview</h1>
+      <div class="card">
+        <h2>Sample Section</h2>
+        <p>This shows a paragraph styled with a color palette.</p>
+        <button>Try Me</button>
+      </div>
+    `;
+
+    const previews = [
+      { id: 'preview1', css: '../styles/p1.css' },
+      { id: 'preview2', css: '../styles/p2.css' },
+    ];
+
+    previews.forEach(({ id, css }) => {
+      const host = document.getElementById(id);
+      const shadow = host.attachShadow({ mode: 'open' });
+
+      // Inject styles
+      const style = document.createElement('link');
+      style.rel = 'stylesheet';
+      style.href = css;
+
+      // Add content + style
+      shadow.appendChild(style);
+      shadow.innerHTML += templates;
     });
   </script>
-  
 </body>
 </html>
