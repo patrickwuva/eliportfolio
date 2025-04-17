@@ -1,9 +1,9 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import ReactPlayer from 'react-player'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
 
-<ReactPlayer
-  url="https://drive.google.com/uc?export=download&id=1Zv6hNa-6mBJTW8ZOx4PGdK3mJu15ak30"
-  controls
-  width="100%"
-/>
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
