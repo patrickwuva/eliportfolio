@@ -28,7 +28,6 @@
 
     iframe {
       width: 100%;
-      height: 300px;
       border: 1px solid #ccc;
       margin-bottom: 2rem;
     }
@@ -52,6 +51,20 @@
         }
       });
     });
+  
+    // 💡 Listen for messages from the iframe to resize its height
+    window.addEventListener("message", (event) => {
+      if (event.data.iframeHeight) {
+        // Find the iframe that sent the message
+        document.querySelectorAll("iframe").forEach(iframe => {
+          // match the origin by comparing contentWindow
+          if (iframe.contentWindow === event.source) {
+            iframe.style.height = event.data.iframeHeight + "px";
+          }
+        });
+      }
+    });
   </script>
+  
 </body>
 </html>
